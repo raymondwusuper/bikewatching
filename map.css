@@ -50,9 +50,6 @@ html, body {
   pointer-events: none;
 }
 
---color-departures: steelblue;
---color-arrivals: darkorange;
-
 #map circle, .legend > div {
   --color-departures: steelblue;
   --color-arrivals: darkorange;
@@ -69,6 +66,20 @@ html, body {
   stroke: white;
   stroke-width: 1;
   pointer-events: auto;
+  cursor: pointer;
+}
+
+.map-tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 0.4em 0.7em;
+  border-radius: 6px;
+  font-size: 0.85em;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+  display: none;
 }
 
 .legend {

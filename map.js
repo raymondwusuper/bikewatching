@@ -14,6 +14,7 @@ const map = new mapboxgl.Map({
 });
 
 const svg = d3.select('#map').select('svg');
+const tooltip = document.getElementById('tooltip');
 
 // Quantize scale: maps departure ratio [0,1] → discrete {0, 0.5, 1}
 const stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
@@ -176,12 +177,16 @@ map.on('load', async () => {
     .style('--departure-ratio', (d) =>
       stationFlow(d.departures / d.totalTraffic),
     )
-    .each(function (d) {
-      d3.select(this)
-        .append('title')
-        .text(
-          `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`,
-        );
+    .on('mouseenter', function (event, d) {
+      tooltip.style.display = 'block';
+      tooltip.textContent = `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`;
+    })
+    .on('mousemove', function (event) {
+      tooltip.style.left = `${event.clientX + 12}px`;
+      tooltip.style.top  = `${event.clientY - 28}px`;
+    })
+    .on('mouseleave', function () {
+      tooltip.style.display = 'none';
     });
 
   updatePositions();
