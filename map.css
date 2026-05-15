@@ -1,0 +1,97 @@
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header label {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+header time {
+  display: block;
+  font-weight: bold;
+  min-width: 5em;
+}
+
+header em {
+  display: block;
+  color: #888;
+  font-style: italic;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+#map {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#map svg {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+--color-departures: steelblue;
+--color-arrivals: darkorange;
+
+#map circle, .legend > div {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+}
+
+#map circle {
+  fill: var(--color);
+  fill-opacity: 0.6;
+  stroke: white;
+  stroke-width: 1;
+  pointer-events: auto;
+}
+
+.legend {
+  display: flex;
+  gap: 1px;
+  margin-block: 1em;
+}
+
+.legend > div {
+  flex: 1;
+  background: var(--color);
+  padding: 0.4em 1em;
+  color: white;
+  font-size: 0.85em;
+  text-align: center;
+}
+
+.legend > div:first-child {
+  border-radius: 4px 0 0 4px;
+  text-align: left;
+}
+
+.legend > div:last-child {
+  border-radius: 0 4px 4px 0;
+  text-align: right;
+}
