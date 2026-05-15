@@ -109,9 +109,10 @@ function updateTimeDisplay() {
   const anyTimeLabel = document.getElementById('any-time');
 
   if (timeFilter === -1) {
-    selectedTime.textContent = '';
+    selectedTime.style.display = 'none';
     anyTimeLabel.style.display = 'block';
   } else {
+    selectedTime.style.display = 'block';
     selectedTime.textContent = formatTime(timeFilter);
     anyTimeLabel.style.display = 'none';
   }
